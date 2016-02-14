@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gapiminder</title>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        margin: 0px;
+      }
+      .title {
+        margin: 0px;
+        background-color: black;
+        color: white;
+      }
+      .content {
+        padding-left: 10px;
+      }
+      ul {
+        list-style-type: none;
+      }
+    </style>
+    <script type="text/javascript">
+      function addOnClick() {
+        // Fetch what the name of the new country will be
+        var countryInput = document.getElementById("newCountry");
+        // And append it to the page
+        addCountry(countryInput.value);
+      }
+      function addCountry(country) {
+        // Construct the new country li element
+        var countryItem = document.createElement("li");
+        console.log(country);
+        // textContent is better, as it doesn't cause the browser
+        // to parse the HTML, and defends against HTML injection.
+        // eg:
+        // Entering "<button onclick='alert("hello")'>Click Me</button>"
+        // with innerHTML will cause a button to be added to the page, whereas
+        // with textContent, it will cause the literal text to be added.
+        countryItem.textContent = country;
+        // and append it to the list of countries
+        document.getElementById("countryList").appendChild(countryItem);
+      }
+    </script>
+  </head>
+  <body>
+    <h1 class="title">Gapiminder - Wealth of Nations</h1>
+    <div class="content">
+      <h2>Countries</h2>
+      <label>Name</label>
+      <input type="text" id="newCountry" />
+      <button onClick="addOnClick();">Add</button>
+      <hr />
+      <ul id="countryList">
+        <li> USA </li>
+        <li> Mexico </li>
+        <li> Canada </li>
+      </ul>
+    </div>
+  </body>
+
+</html>
