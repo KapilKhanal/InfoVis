@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gapiminder</title>
+    <meta charset="UTF-8" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.15/d3.min.js"></script>
+    <style>
+      body {
+        margin: 0px;
+      }
+      .title {
+        margin: 0px;
+        background-color: black;
+        color: white;
+      }
+      .content {
+        padding-left: 10px;
+      }
+      ul {
+        list-style-type: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Gapminder - Wealth and Health</h1>
+    <h2>Countries</h2>
+    <ul id="viz">
+    </ul>
+
+    <!-- Note: in your demonstration you had <script> after the body closing
+          tag, which activates the "quirks" mode on the browser, which should be
+          avoided, as the behavior of the browser renderer in quirks mode is
+          not defined by any spec, and greatly damages your ability to ensure
+          a consistent experience.  It also disables a lot of the more advanced
+          html5 features.
+    -->
+    <script type="text/javascript">
+      var viz = d3.select("#viz");
+
+      var gapMinderLocation = "https://raw.githubusercontent.com/CristianFelix/infoviz/master/gapminder.json";
+      var gapMinderData = {};
+      d3.json(gapMinderLocation,
+        function(err, result) {
+          if(err) {
+            console.log("Error loading data: " + err);
+            return;
+          }
+
+          gapMinderData = result;
+          refreshData();
+        });
+
+      function refreshData() {
+        var changes =
+          viz.selectAll("li")
+              .data(gapMinderData, function(country) { return country.name; });
+        changes.enter()
+          .append("li")
+          .text(function(country) {
+            return country.name;
+          });
+      }
+    </script>
+  </body>
+</html>
