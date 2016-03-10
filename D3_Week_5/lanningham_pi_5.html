@@ -211,6 +211,9 @@
       function unhighlight(country) {
         dataPointGroup.selectAll("circle")
           .style({stroke: undefined});
+        countries.selectAll("li")
+          .style("color", function(d) { return colorScale(d.region); })
+          .style("background-color", undefined);
       }
     </script>
   </body>
